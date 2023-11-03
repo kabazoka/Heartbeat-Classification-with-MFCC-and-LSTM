@@ -34,7 +34,7 @@ Last Edited Time: November 4, 2023 1:03 AM
 > 
 > 由於資料集中正常(normal)心音以及不正常(abnormal)心音比例相當不均(接近8:2)，我們在訓練模型前將不正常心音的權重增加{Normal: 1.8433734939759037, Abnormal: 8.052631578947368}以平衡資料量不均在訓練過程中可能造成的差異。
 > 
-> ![images/image2.png](Heartbeat%20Recognition%20with%20MFCC%20and%20LSTM%202c3d880546434ef7aede060973aa7a7d/image2.png)
+> ![images/image2.png](images/image2.png)
 > 
 
 Figure 1: 正常心音以及不正常心音之比例差距
@@ -48,7 +48,7 @@ Figure 1: 正常心音以及不正常心音之比例差距
 > 
 > 長短期記憶（Long Short-Term Memory，LSTM）是一種時間循環神經網路（RNN），能夠解決長序列訓練過程中的梯度消失和梯度爆炸問題，適合於處理和預測時間序列中間隔和延遲非常長的資料。
 > 
-> ![images/image3.png](Heartbeat%20Recognition%20with%20MFCC%20and%20LSTM%202c3d880546434ef7aede060973aa7a7d/image3.png)
+> ![images/image3.png](images/image3.png)
 > 
 
 Figure 2: LSTM架構
@@ -60,9 +60,9 @@ Figure 2: LSTM架構
 > 模型訓練結果以準確度、混淆矩陣及各種模型指標呈現。
 > 
 
-![images/image4.png](Heartbeat%20Recognition%20with%20MFCC%20and%20LSTM%202c3d880546434ef7aede060973aa7a7d/image4.png)
+![images/image4.png](images/image4.png)
 
-![images/image5.png](Heartbeat%20Recognition%20with%20MFCC%20and%20LSTM%202c3d880546434ef7aede060973aa7a7d/image5.png)
+![images/image5.png](images/image5.png)
 
 Figure 3: 模型準確度
 
@@ -85,10 +85,10 @@ Figure 4: 混淆矩陣
 > 
 1. Figure 5: 模型準確度
     
-    ![images/image5.png](Heartbeat%20Recognition%20with%20MFCC%20and%20LSTM%202c3d880546434ef7aede060973aa7a7d/image5.png)
+    ![images/image5.png](images/image5.png)
     
 
-![images/image4.png](Heartbeat%20Recognition%20with%20MFCC%20and%20LSTM%202c3d880546434ef7aede060973aa7a7d/image4.png)
+![images/image4.png](images/image4.png)
 
 Figure 6: 混淆矩陣
 
