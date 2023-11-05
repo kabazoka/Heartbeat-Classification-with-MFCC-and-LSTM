@@ -3,73 +3,63 @@
 Created: November 4, 2023 1:00 AM
 Last Edited Time: November 4, 2023 1:03 AM
 
-# 第一章、緒 論
+# Chapter 1, Introduction
 
-## 第一節 研究動機
+## Section 1, Research Motivation
 
-> 由於組員家人患有心臟相關慢性疾病，因而對於心臟問題有一定程度的關心以及防患意識，在尋找期末專題過程中恰好發現本專題所使用之心音資料集，從而開始研究能否開發藉由心音辨識是否患有心臟疾病之人工智慧模型之可行性。
-> 
+> Due to the family members of the team having chronic heart-related illnesses, there is a certain level of concern and awareness about heart issues. During the search for a final project, we coincidentally discovered the heart sound dataset used in this project, leading us to explore the feasibility of developing an artificial intelligence model for heart disease detection through heart sound recognition.
 
-# 第二章、研究內容與方法
+# Chapter 2, Research Content and Methods
 
-## 第一節 資料前處理
+## Section 1, Data Preprocessing
 
-> 本節將探討資料前處理步驟，並將本節分為兩大部分：壹 讀取資料、貳 MFCC特徵提取及三 資料類別加權。
-> 
+> This section discusses the data preprocessing steps, divided into three main parts: One, Data Loading; Two, MFCC Feature Extraction; and Three, Data Class Weighting.
 
-### 壹、讀取資料
+### One, Data Loading
 
-> 我們使用panda函式庫讀取資料集中已預先分類之訓練(training)以及驗證(validation)資料夾，藉由讀取標記檔案(reference.csv)獲取個別資料之相關資訊，並將儲存之資料已正常(normal)與不正常(abnormal)標記於資料結構中。
-> 
-> 
-> ### 貳、MFCC特徵提取
-> 
-> 我們將音訊統一率切割為時長5秒的檔案以標準化樣本，並使用梅爾頻率倒譜係數(Mel-Frequency Cepstral
-> 
-> Coefficient，MFCC)提取音訊特徵。
-> 
-> 梅爾頻率倒譜係數能夠考慮到人耳對於不同頻率會有不同敏感度的特性，因而常用於語音辨識。語音訊號經過預強調 (Pre-emphasis) 來突顯高頻的部份，之後將訊號轉變為音框(Frame)，並對每一個音框乘上一漢明窗(Hamming Window) 來增加音框的連續性，接下來經由快速傅立葉轉換(Fast Fourier Transform,FFT) 將訊號從時域轉換到頻域上，再將得到的能量頻譜乘上M個三角帶通濾波器(Triangular Bandpass Filters)，獲得每一個濾波器輸出的對數能量(Log energy)，將上述的M個對數能量透過離散餘弦轉換(Discrete Cosine Transform, DCT) 後，即可求得梅爾頻率倒譜係數。
-> 
-> ### 參、資料類別加權
-> 
-> 由於資料集中正常(normal)心音以及不正常(abnormal)心音比例相當不均(接近8:2)，我們在訓練模型前將不正常心音的權重增加{Normal: 1.8433734939759037, Abnormal: 8.052631578947368}以平衡資料量不均在訓練過程中可能造成的差異。
-> 
+> We use the Pandas library to load the pre-classified training and validation folders from the dataset. By reading the label file (reference.csv), we obtain relevant information about each data and store the data with normal and abnormal labels in the data structure.
+
+### Two, MFCC Feature Extraction
+
+> We segment the audio uniformly into 5-second files to standardize the samples and extract audio features using Mel-Frequency Cepstral Coefficients (MFCC).
+
+> Mel-Frequency Cepstral Coefficients take into account the human ear's sensitivity to different frequencies, making them commonly used in speech recognition. The speech signal is pre-emphasized to highlight high-frequency components. The signal is then transformed into frames, and each frame is multiplied by a Hamming window to increase frame continuity. Afterward, the Fast Fourier Transform (FFT) is used to convert the signal from the time domain to the frequency domain. The obtained energy spectrum is multiplied by M triangular bandpass filters to obtain the logarithmic energy for each filter. After applying Discrete Cosine Transform (DCT) to the M logarithmic energy values, Mel-Frequency Cepstral Coefficients can be calculated.
+
+### Three, Data Class Weighting
+
+> Since the dataset has a significant class imbalance between normal and abnormal heart sounds (close to 8:2 ratio), we increase the weight of abnormal heart sounds before training the model to balance the uneven data distribution that may lead to differences during training.
+
 > ![images/image2.png](images/image2.png)
-> 
 
-Figure 1: 正常心音以及不正常心音之比例差距
+> Figure 1: Disparity in the ratio of normal and abnormal heart sounds
 
-## 第二節 訓練模型
+## Section 2, Model Training
 
-### 壹、LSTM
+### One, LSTM
 
-> 由於本專題是處理音訊資料，該資料特性為會依時間序列變化的資料類型，我們決定以LSTM訓練資料。
-> 
-> 
-> 長短期記憶（Long Short-Term Memory，LSTM）是一種時間循環神經網路（RNN），能夠解決長序列訓練過程中的梯度消失和梯度爆炸問題，適合於處理和預測時間序列中間隔和延遲非常長的資料。
-> 
+> As this project deals with audio data, which is a type of data that varies over time, we decided to train the data using LSTM.
+
+> Long Short-Term Memory (LSTM) is a type of recurrent neural network (RNN) that can address the vanishing and exploding gradient problems during training of long sequences. It is suitable for processing and predicting data with long intervals and delays in time series.
+
 > ![images/image3.png](images/image3.png)
-> 
 
-Figure 2: LSTM架構
+> Figure 2: LSTM Architecture
 
-# 第三章、研究結果
+# Chapter 3, Research Results
 
-## 第一節 模型訓練結果
+## Section 1, Model Training Results
 
-> 模型訓練結果以準確度、混淆矩陣及各種模型指標呈現。
-> 
+> The model training results are presented in terms of accuracy, confusion matrix, and various model metrics.
 
 ![images/image4.png](images/image4.png)
 
 ![images/image5.png](images/image5.png)
 
-Figure 3: 模型準確度
+> Figure 3: Model Accuracy
 
-Figure 4: 混淆矩陣
+> Figure 4: Confusion Matrix
 
-> 各種模型指標：
-> 
+> Various model metrics:
 
 |  | Precision | Recall | F1-score | Support |
 | --- | --- | --- | --- | --- |
@@ -79,21 +69,19 @@ Figure 4: 混淆矩陣
 | Macro avg. | 0.97 | 0.99 | 0.98 | 612 |
 | Weighted avg. | 0.99 | 0.99 | 0.99 | 612 |
 
-## 第二節 模型預測應用結果
+## Section 2, Model Prediction Application Results
 
-> 模型預測應用結果以準確度、混淆矩陣及各種模型指標呈現。
-> 
-1. Figure 5: 模型準確度
-    
+> The results of the model prediction application are presented in terms of accuracy, confusion matrix, and various model metrics.
+
+1. Figure 5: Model Accuracy
+
     ![images/image5.png](images/image5.png)
-    
 
 ![images/image4.png](images/image4.png)
 
-Figure 6: 混淆矩陣
+> Figure 6: Confusion Matrix
 
-> 各種模型指標：
-> 
+> Various model metrics:
 
 |  | Precision | Recall | F1-score | Support |
 | --- | --- | --- | --- | --- |
@@ -103,6 +91,6 @@ Figure 6: 混淆矩陣
 | Macro avg. | 0.70 | 0.70 | 0.70 | 301 |
 | Weighted avg. | 0.70 | 0.70 | 0.70 | 301 |
 
-# 第四章、結 論
+# Chapter 4, Conclusion
 
-經過我們的討論及推測，雖然在使用原本資料集內的資料來測試模型時能達到99%的準確度，但在預測時模型卻只能達成70%的準確度。我們認為可能是因為訓練次數不夠或資料數量差距太大導致預測模型準確度太低的結果。雖然經過我們嘗試增加權重進行訓練以後結果依舊無法進步，但或許在未來我們能夠以目前所知以外的技巧來達成更好的結果。
+After our discussions and speculations, although the model achieved a 99% accuracy when tested with the original dataset, it could only achieve 70% accuracy in predictions. We believe this might be due to insufficient training or the significant disparity in data quantity, leading to the low prediction model accuracy. Despite our attempts to improve the model by increasing weights, there may be techniques beyond our current knowledge that could lead to better results in the future.
